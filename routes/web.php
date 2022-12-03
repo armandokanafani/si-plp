@@ -1,6 +1,10 @@
 <?php
 
+use App\Http\Controllers\LoginController;
+use App\Http\Controllers\Admin;
+use App\Http\Controllers\Mahasiswa;
 use Illuminate\Support\Facades\Route;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +17,26 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+// Route::get('/', function () {
+//     return view('auth.login');
+// });
+Route::get('/', [LoginController::class, 'index']);
+Route::get('login', [LoginController::class, 'index'])->name('login');
+Route::post('login/proses', [LoginController::class, 'proses']);
+Route::get('logout', [LoginController::class, 'logout'])->name('logout');
+
+Route::group(['middleware' => ['auth']], function () {
+    Route::group(['middleware' => ['checkUserLogin:1']], function () {
+        Route::get('admin', [Admin::class, 'index']);
+    });
+
+    Route::group(['middleware' => ['checkUserLogin:6']], function () {
+        Route::get('mahasiswa', [Mahasiswa::class, 'index']);
+    });
 });
+
+
+// Route::controller(LoginController::class)->group(function () {
+//     Route::get('login', 'index')->name('login');
+//     Route::post('login/proses', 'proses');
+// });
