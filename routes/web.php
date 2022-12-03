@@ -1,8 +1,10 @@
 <?php
 
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\LayoutController;
 use App\Http\Controllers\Admin;
 use App\Http\Controllers\Mahasiswa;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -20,14 +22,32 @@ use Illuminate\Support\Facades\Route;
 // Route::get('/', function () {
 //     return view('auth.login');
 // });
-Route::get('/', [LoginController::class, 'index']);
+Route::get('/', [LayoutController::class, 'index'])->middleware('auth');
+Route::get('home', [LayoutController::class, 'index'])->middleware('auth');
+
+// Logn Route
 Route::get('login', [LoginController::class, 'index'])->name('login');
 Route::post('login/proses', [LoginController::class, 'proses']);
 Route::get('logout', [LoginController::class, 'logout'])->name('logout');
 
 Route::group(['middleware' => ['auth']], function () {
     Route::group(['middleware' => ['checkUserLogin:1']], function () {
-        Route::get('admin', [Admin::class, 'index']);
+
+        //Pengelolaan Pengguna 
+
+        // Show Pengguna
+        Route::get('admin/showPengguna', [UserController::class, 'index'])->name('show.user');
+
+        // Add Pengguna
+        Route::get('admin/user-add', [UserController::class, 'create'])->name('add.user');
+        Route::post('admin/user-add-process', [UserController::class, 'addProcess'])->name('add.process.user');
+
+        // Edit Pengguna
+        Route::get('admin/user-edit/{id}', [UserController::class, 'edit'])->name('edit.user');
+        Route::post('admin/user-edit-process/{id}', [UserController::class, 'editProcess'])->name('process.user.edit');
+
+        // Delete Pengguna
+        Route::get('admin/user-delete/{id}', [UserController::class, 'delete'])->name('delete.user');
     });
 
     Route::group(['middleware' => ['checkUserLogin:6']], function () {
