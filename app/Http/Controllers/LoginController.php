@@ -10,20 +10,22 @@ class LoginController extends Controller
     public function index()
     {
 
-        if ($user = Auth::user()) {
-            if ($user->level == '1') {
-                return redirect()->intended('admin');
-            } elseif ($user->level == '2') {
-                return redirect()->intended('kaprodi');
-            } elseif ($user->level == '3') {
-                return redirect()->intended('kepsek');
-            } elseif ($user->level == '4') {
-                return redirect()->intended('dospem');
-            } elseif ($user->level == '5') {
-                return redirect()->intended('pamong');
-            } elseif ($user->level == '6') {
-                return redirect()->intended('mahasiswa');
-            }
+        if (Auth::user()) {
+            // if ($user->level == '1') {
+            //     return redirect()->intended('admin');
+            // } elseif ($user->level == '2') {
+            //     return redirect()->intended('kaprodi');
+            // } elseif ($user->level == '3') {
+            //     return redirect()->intended('kepsek');
+            // } elseif ($user->level == '4') {
+            //     return redirect()->intended('dospem');
+            // } elseif ($user->level == '5') {
+            //     return redirect()->intended('pamong');
+            // } elseif ($user->level == '6') {
+            //     return redirect()->intended('mahasiswa');
+            // }
+
+            return redirect()->intended('home');
         }
 
         return view('auth.login');
@@ -41,18 +43,21 @@ class LoginController extends Controller
         if (Auth::attempt($kredensial)) {
             $request->session()->regenerate();
             $user = Auth::user();
-            if ($user->level == '1') {
-                return redirect()->intended('admin');
-            } elseif ($user->level == '2') {
-                return redirect()->intended('kaprodi');
-            } elseif ($user->level == '3') {
-                return redirect()->intended('kepsek');
-            } elseif ($user->level == '4') {
-                return redirect()->intended('dospem');
-            } elseif ($user->level == '5') {
-                return redirect()->intended('pamong');
-            } elseif ($user->level == '6') {
-                return redirect()->intended('mahasiswa');
+            // if ($user->level == '1') {
+            //     return redirect()->intended('admin');
+            // } elseif ($user->level == '2') {
+            //     return redirect()->intended('kaprodi');
+            // } elseif ($user->level == '3') {
+            //     return redirect()->intended('kepsek');
+            // } elseif ($user->level == '4') {
+            //     return redirect()->intended('dospem');
+            // } elseif ($user->level == '5') {
+            //     return redirect()->intended('pamong');
+            // } elseif ($user->level == '6') {
+            //     return redirect()->intended('mahasiswa');
+            // }
+            if ($user) {
+                return redirect()->intended('home');
             }
 
             return redirect()->intended('/');
