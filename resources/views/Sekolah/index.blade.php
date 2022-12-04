@@ -14,6 +14,7 @@
     }
     </style>
         <h1>DAFTAR NAMA SEKOLAH</h1>
+        <a href="{{ route('sekolah.create') }}">Tambah Sekolah</a>
         <table>
             <tr>
                 <td>No</td>

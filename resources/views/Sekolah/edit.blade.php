@@ -7,7 +7,7 @@
     <title>Edit</title>
 </head>
 <body>
-    <h1>Tambah Data Sekolah</h1> <br> <br>
+    <h1>Edit Data Sekolah</h1> <br> <br>
     <form action="{{ route('sekolah.update', $sekolah->id) }}" method="POST">
         @csrf
         @method('PUT')
