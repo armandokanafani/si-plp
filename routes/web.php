@@ -5,7 +5,6 @@ use App\Http\Controllers\Admin;
 use App\Http\Controllers\Mahasiswa;
 use Illuminate\Support\Facades\Route;
 
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -35,8 +34,16 @@ Route::group(['middleware' => ['auth']], function () {
     });
 });
 
-
-// Route::controller(LoginController::class)->group(function () {
-//     Route::get('login', 'index')->name('login');
-//     Route::post('login/proses', 'proses');
-// });
+Route::prefix('admin')->group(function() {
+    Route::resource('sekolah', SekolahController::class, [
+        'names' => [
+            'index' => 'sekolah.index',
+            'show' => 'sekolah.show',
+            'store' => 'sekolah.store',
+            'create'=> 'sekolah.create',
+            'edit'=> 'sekolah.edit',
+            'update'=> 'sekolah.update',
+            'destroy'=> 'sekolah.destroy'
+            ]
+    ]);
+});
