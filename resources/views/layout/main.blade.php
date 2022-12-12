@@ -13,12 +13,14 @@
 
     <!-- inject:css -->
     <link rel="stylesheet" href="{{asset('css/style.css')}}">
-  <link rel="stylesheet" href="{{asset('css/font-awesome.min.css')}}">
-  <link rel="stylesheet" href="{{ asset('css/select2.css')}}">
-  <link rel="stylesheet" href="{{ asset('css/dataTables.bootstrap4.min.css')}}">
-    @section('css')
+    <link rel="stylesheet" href="{{asset('css/font-awesome.min.css')}}">
+    <link rel="stylesheet" href="{{ asset('css/select2.css')}}">
+    <link rel="stylesheet" href="{{ asset('css/dataTables.bootstrap4.min.css')}}">
 
-    @show
+    <!-- plugin:sbadmin-->
+    <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
+    <link href="{{ asset('sbadmin/css/styles.css') }}" rel="stylesheet" />
+    <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
 </head>
 <body>
     <div class="container-scroller">
@@ -41,12 +43,8 @@
                             <span class="profile-text">Hello, {{ $user->nama }}</span>
                         </a>
                         <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="UserDropdown">
-                            <a class="dropdown-item p-0">
+                            <a class="dropdown-item pt-2">
                                 <div class="d-flex border-bottom"></div>
-                            </a>
-                            <a class="dropdown-item" style="margin-top: 20px;" href="">
-                            Edit Profile
-                            </a>
                             <a class="dropdown-item" href="{{ url('logout') }}">
                                 Sign Out
                             </a>
@@ -61,7 +59,7 @@
             <!-- partial:partials/_sidebar.html -->
             <nav class="sidebar sidebar-offcanvas" id="sidebar">
             @section('sidebar')
-                @include('layout.sidebar', ['user' => Auth::user()])
+                @include('layout.sidebar')
             @show
             </nav>
         
@@ -85,9 +83,12 @@
     <script src="{{asset('js/dataTables.bootstrap4.min.js')}}"></script>
     <script src="{{asset('js/sweetalert2.all.js')}}"></script>
     <script src="{{asset('js/select2.min.js')}}"></script>
-    @section('js')
     
-    @show
+    <!-- plugin:sbadmin -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+    <script src="{{ asset('sbadmin/js/scripts.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
+    <script src="{{ asset('sbadmin/js/datatables-simple-demo.js') }}"></script>
 </body>
 
 

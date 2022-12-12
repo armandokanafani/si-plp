@@ -2,6 +2,11 @@
 
 @section('content')
 {{-- Tambah User --}}
+@if (session('status'))
+    <div class="alert alert-danger">
+        {{ session('status') }}
+    </div>   
+@endif
 <div class="row">
     <div class="col-lg-2">
         <a href="{{ route('add.user') }}" class="btn btn-primary btn-rounded btn-fw"><i class="fa fa-plus"></i> Tambah User</a>
@@ -14,7 +19,7 @@
             <div class="card-body">
                 <h4 class="card-title">Data User</h4>
                 <div class="table-responsive">
-                    <table id="table" class="table table-striped">
+                    <table id="datatablesSimple" class="table-striped">
                         <thead>
                             <tr>
                                 <th>Nama</th>
@@ -29,11 +34,7 @@
                             @foreach($datas as $data)
                             <tr>
                                 <td class="py-1">{{$data->nama}}</td>
-                                <td>
-                                    <a href=""> 
-                                        {{$data->username}}
-                                    </a>
-                                </td>
+                                <td>{{$data->username}}</td>
                                 <td>{{$data->email}}</td>
                                 <td>
                                     @if($data->level == '1')  Admin @endif
@@ -51,7 +52,7 @@
                                         </button>
                                         <div class="dropdown-menu" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 30px, 0px);">
                                             <a class="dropdown-item warning" href="{{ route('edit.user', $data->id) }}"> Edit </a>
-                                            <form action="{{ route('delete.user', $data->id) }}" class="pull-left"  method="post">
+                                            <form action="{{ route('delete.user', $data->id) }}" class="pull-left"  method="get">
                                                 {{ csrf_field() }}
                                                 <button class="dropdown-item" onclick="return confirm('Anda yakin ingin menghapus data ini?')"> Delete
                                                 </button>

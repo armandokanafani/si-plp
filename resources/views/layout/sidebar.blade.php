@@ -21,19 +21,41 @@
                         <a class="nav-link" href="{{ route('show.user') }}">Data Pengguna</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="">Data Penempatan</a>
+                        <a class="nav-link" href="{{ route('sekolah.index') }}">Data Sekolah</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="">Data Pengalokasian</a>
+                        <a class="nav-link" href="{{ route('show.pendataan.admin') }}">Data Pengalokasian</a>
                     </li>
                 </ul>
             </div>
         </li>
     @endif
 
+    {{-- Kaprodi --}}
+    @if ($user->level == 2)
+        <li class="nav-item">
+            <a class="nav-link" href="{{ route('show.pendataan.kaprodi') }}">Pendataan Penempatan</a>
+        </li>
+    @endif
+
+    {{-- Koordinator --}}
+    @if ($user->level == 4)
+        <li class="nav-item">
+            <a class="nav-link" href="{{ route('show.pendataan.koor') }}">Pendataan Penempatan</a>
+        </li>
+    @endif
+
+
+    {{-- Pamong --}}
+    @if ($user->level == 5)
+        <li class="nav-item">
+            <a class="nav-link" href="{{ route('show.pendataan.pamong') }}">Pendataan Penempatan</a>
+        </li>
+    @endif
+
     {{-- Mahasiwsa --}}
     @if ($user->level == 6)
         <li class="nav-item">
-            <a class="nav-link" href="">Pendataan Penempatan</a>
+            <a class="nav-link" href="{{ route('add.pendataan') }}">Pendataan Penempatan</a>
         </li>
     @endif

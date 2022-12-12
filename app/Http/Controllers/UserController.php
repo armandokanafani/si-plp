@@ -19,6 +19,7 @@ class UserController extends Controller
         ]);
     }
 
+
     public function create()
     {
         return view('user.addUser')->with([
@@ -29,13 +30,14 @@ class UserController extends Controller
     public function addProcess(Request $request)
     {
         // Cek Username
-        // $count = User::where('username', $request->input('username'));
+        $count = User::where('username', $request->input('username'))->exists();
 
-        // if ($count) {
-        //     $request->session()->flash('message', 'Username sudah terdaftar');
-        //     $request->session()->flash('message_type', 'danger');
-        //     return redirect()->intended('admin/showPengguna');
-        // }
+        if ($count > 0) {
+            // echo '<script language="javascript">';
+            // echo 'alert("Username telah terdaftar")';
+            // echo '</script>';
+            return redirect('admin/showPengguna')->with('status', 'Username telah terdaftar');
+        }
 
         // Proses penambahan
         User::create([

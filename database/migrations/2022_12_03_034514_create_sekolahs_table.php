@@ -13,11 +13,10 @@ class CreateSekolahsTable extends Migration
      */
     public function up()
     {
-        Schema::create('sekolahs', function (Blueprint $table) {
+        Schema::create('sekolah', function (Blueprint $table) {
             $table->id();
             $table->string('nama_sekolah');
             $table->string('alamat_sekolah');
-            $table->string('keminatan');
             $table->string('kepala_sekolah');
             $table->string('guru_pamong');
             $table->timestamps();
@@ -31,6 +30,6 @@ class CreateSekolahsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('sekolahs');
+        Schema::dropIfExists('sekolah');
     }
 }
